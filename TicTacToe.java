@@ -27,8 +27,7 @@ class TicTacToe {
 		boolean gWon = false;
 		while(!gWon) {
 
-
-			display(board);
+			printBoardCoordinates(board);
 			if(play1) {
 				System.out.println(p1 + " Turn:");
 			} else {
@@ -52,15 +51,15 @@ class TicTacToe {
 				System.out.print("Enter a column number (0, 1, or 2): ");
 				col = s.nextInt();
 
-				//Check if the row and col are 0, 1, or 2
+				
 				if(row < 0 || col < 0 || row > 2 || col > 2) {
 					System.out.println("This position is off the bounds of the board! Try again.");
 				
-				//Check if the position on the board the user entered is empty (has a -) or not
-				} else if(board[row][col] != '-') {
+				
+				} else if(board[row][col] != ' ') {
 					System.out.println("Someone has already made a move at this position! Try again.");
 				
-				//Otherwise, the position is valid so break out of the while loop
+				
 				} else {
 					break;
 				}
@@ -76,24 +75,21 @@ class TicTacToe {
 				System.out.println(p2 + " has won!");
 				gWon = true;
 			} else {
-
-				//If neither player has won, check to see if there has been a tie (if the board is full)
-				if(gameTie(board)) {
+				if(boardIsFull(board)) {
 					System.out.println("It's a tie!");
 					gWon = true;
 				} else {
-					//If player1 is true, make it false, and vice versa; this way, the players alternate each turn
 					play1 = !play1;
 				}
 
 			}
 
 		}
-		display(board);
+		printBoardCoordinates(board);
 
   }
 
-	public static void display(char[][] board) {
+	public static void printBoardCoordinates(char[][] board) {
 		System.out.println("Board:");
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
@@ -126,7 +122,7 @@ class TicTacToe {
 	}
 
 
-	public static boolean gameTie(char[][] board) {
+	public static boolean boardIsFull(char[][] board) {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				if(board[i][j] == ' ') {
